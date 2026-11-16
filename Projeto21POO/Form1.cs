@@ -7,43 +7,29 @@ namespace Projeto21POO
 {
     public partial class Form1 : Form
     {
-        private Baralho baralho;
-        private Jogador jogador;
-        private Jogador banca;
+        private Jogo jogo;
+        private bool jogoEncerrado = false;
 
         public Form1()
         {
             InitializeComponent();
+            jogo = new Jogo();
         }
 
-        public void IniciaJogo()
+        public void IniciarPartida()
         {
-            List<string> NumerosPossiveis = new List<string> { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
-            List<string> NaipesPossiveis = new List<string> { "Paus", "Ouros", "Copas", "Espadas" };
-
-            baralho = new Baralho(NumerosPossiveis, NaipesPossiveis);
-
-            baralho.ConstroiBaralho();
-            baralho.Embaralha();
-
-            jogador = new Jogador();
-            banca = new Jogador();
-
-            for (int i = 0; i < 2; i++)
-            {
-                jogador.ReceberCarta(baralho.RetiraCarta());
-                banca.ReceberCarta(baralho.RetiraCarta());
-            }
-            AtualizarMesa();
+            jogo.IniciaJogo();
+            jogoEncerrado = false;
+            AtualizarMesa(false);
         }
 
-        public void AtualizarMesa()
+        public void AtualizarMesa(bool revelar_banca)
         {
 
             flowLayoutPanelJogador.Controls.Clear();
             flowLayoutPanelBanca.Controls.Clear();
 
-            foreach (Carta c in jogador.GetMao())
+            foreach (Carta c in jogo.GetJogador().GetMao())
             {
                 PictureBox pic = new PictureBox();
                 pic.Size = new Size(100, 140);
@@ -53,19 +39,19 @@ namespace Projeto21POO
                 flowLayoutPanelJogador.Controls.Add(pic);
             }
 
-            for (int i = 0; i < banca.GetMao().Count; i++)
+            for (int i = 0; i < jogo.GetBanca().GetMao().Count; i++)
             {
                 PictureBox pic = new PictureBox();
                 pic.Size = new Size(100, 140);
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                if (i == 1 && banca.GetMao().Count == 2)
+                if (i == 1 && !revelar_banca && jogo.GetBanca().GetMao().Count == 2)
                 {
-                    pic.Image = Image.FromFile("Cartas\\deck_2\\back.png");
+                    pic.Image = Image.FromFile("deck_2\\back.png");
                 }
                 else
                 {
-                    pic.Image = banca.GetMao()[i].GetImagem();
+                    pic.Image = jogo.GetBanca().GetMao()[i].GetImagem();
                 }
 
                 flowLayoutPanelBanca.Controls.Add(pic);
@@ -82,22 +68,54 @@ namespace Projeto21POO
             panelJogo.Visible = true;
         }
 
-        //tem que ver se o jogador perdeu
-        public void ChecagemRegras() { }
+        private void FinalizarPartida(int resultado)
+        {
+            jogoEncerrado = true;
+            AtualizarMesa(true);
+
+            if (resultado == 1)
+            {
+                MessageBox.Show("Parabéns! Você venceu a banca!", "Fim de Jogo");
+            }
+            else
+            {
+                MessageBox.Show("A banca venceu!", "Fim de Jogo");
+            }
+        }
 
         private void ButtonNormal_Click(object sender, EventArgs e)
         {
             TelaJogo(); 
-            IniciaJogo();
+            IniciarPartida();
         }
 
         private void ButtonComprar_Click(object sender, EventArgs e)
         {
-            jogador.ReceberCarta(baralho.RetiraCarta());
-            AtualizarMesa();
-            //Verifica se perdeu aqui
+            if (jogoEncerrado) return;
+
+            jogo.PedirCartaJogador();
+            AtualizarMesa(false);
+
+            int resultado = jogo.VerificarFimDeJogo(false);
+            if (resultado != 0)
+            {
+                FinalizarPartida(resultado);
+            }
         }
 
+        private void ButtonParar_Click(object sender, EventArgs e)
+        {
+            if (jogoEncerrado) return;
 
+            jogo.JogarBanca();
+
+            int resultado = jogo.VerificarFimDeJogo(true);
+            FinalizarPartida(resultado);
+        }
+
+        private void ButtonReiniciar_Click(object sender, EventArgs e)
+        {
+            IniciarPartida();
+        }
     }
 }

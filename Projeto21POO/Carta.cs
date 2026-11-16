@@ -101,10 +101,10 @@ namespace Projeto21POO
 
         private void CarregarImagem()
         {
-            string nomeArquivo = $"{this.Naipe}_{this.Numero}.png";
+            string nomeArquivo = $"{this.Numero}_{this.Naipe}.png";
             try
             {
-                string caminho = $"Cartas\\deck_2\\{nomeArquivo}";
+                string caminho = $"deck_2\\{nomeArquivo}";
                 this.Imagem = Image.FromFile(caminho);
             }
             catch (Exception ex) 
