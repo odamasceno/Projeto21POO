@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Projeto21POO
@@ -57,6 +58,20 @@ namespace Projeto21POO
                 flowLayoutPanelBanca.Controls.Add(pic);
             }
 
+            lblPontosJogador.Text = $"Pontuação Jogador: {jogo.GetJogador().GetPontuacao()}";
+
+            if (revelar_banca)
+            {
+                lblPontosBanca.Text = $"Pontuação Banca: {jogo.GetBanca().GetPontuacao()}";
+            }
+            else if (jogo.GetBanca().GetMao().Count > 0)
+            {
+                Carta primeiraCarta = jogo.GetBanca().GetMao()[0];
+                int valorVisivel = (primeiraCarta.GetNumero() == "A") ? 11 : primeiraCarta.GetValor();
+
+                lblPontosBanca.Text = $"Pontuação Banca: {valorVisivel} + ?";
+            }
+
 
             this.Refresh();
         }
@@ -103,11 +118,19 @@ namespace Projeto21POO
             }
         }
 
-        private void ButtonParar_Click(object sender, EventArgs e)
+        private async void ButtonParar_Click(object sender, EventArgs e)
         {
             if (jogoEncerrado) return;
 
-            jogo.JogarBanca();
+            AtualizarMesa(true);
+            await Task.Delay(800);
+
+            while (jogo.GetBanca().DeveComprarCarta())
+            {
+                jogo.JogarBanca();
+                AtualizarMesa(true);
+                await Task.Delay(800);
+            }
 
             int resultado = jogo.VerificarFimDeJogo(true);
             FinalizarPartida(resultado);

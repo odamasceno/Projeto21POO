@@ -37,6 +37,8 @@
             this.ButtonParar = new System.Windows.Forms.Button();
             this.ButtonComprar = new System.Windows.Forms.Button();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.lblPontosJogador = new System.Windows.Forms.Label();
+            this.lblPontosBanca = new System.Windows.Forms.Label();
             this.panelJogo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +72,7 @@
             this.flowLayoutPanelJogador.Location = new System.Drawing.Point(19, 18);
             this.flowLayoutPanelJogador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelJogador.Name = "flowLayoutPanelJogador";
-            this.flowLayoutPanelJogador.Size = new System.Drawing.Size(665, 229);
+            this.flowLayoutPanelJogador.Size = new System.Drawing.Size(665, 189);
             this.flowLayoutPanelJogador.TabIndex = 3;
             this.flowLayoutPanelJogador.WrapContents = false;
             // 
@@ -78,15 +80,17 @@
             // 
             this.flowLayoutPanelBanca.AutoScroll = true;
             this.flowLayoutPanelBanca.BackColor = System.Drawing.Color.SeaGreen;
-            this.flowLayoutPanelBanca.Location = new System.Drawing.Point(19, 254);
+            this.flowLayoutPanelBanca.Location = new System.Drawing.Point(19, 275);
             this.flowLayoutPanelBanca.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelBanca.Name = "flowLayoutPanelBanca";
-            this.flowLayoutPanelBanca.Size = new System.Drawing.Size(665, 250);
+            this.flowLayoutPanelBanca.Size = new System.Drawing.Size(665, 195);
             this.flowLayoutPanelBanca.TabIndex = 4;
             this.flowLayoutPanelBanca.WrapContents = false;
             // 
             // panelJogo
             // 
+            this.panelJogo.Controls.Add(this.lblPontosBanca);
+            this.panelJogo.Controls.Add(this.lblPontosJogador);
             this.panelJogo.Controls.Add(this.ButtonReiniciar);
             this.panelJogo.Controls.Add(this.ButtonParar);
             this.panelJogo.Controls.Add(this.ButtonComprar);
@@ -142,6 +146,26 @@
             this.panelMenu.Size = new System.Drawing.Size(885, 530);
             this.panelMenu.TabIndex = 6;
             // 
+            // lblPontosJogador
+            // 
+            this.lblPontosJogador.AutoSize = true;
+            this.lblPontosJogador.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPontosJogador.Location = new System.Drawing.Point(13, 209);
+            this.lblPontosJogador.Name = "lblPontosJogador";
+            this.lblPontosJogador.Size = new System.Drawing.Size(92, 32);
+            this.lblPontosJogador.TabIndex = 8;
+            this.lblPontosJogador.Text = "label1";
+            // 
+            // lblPontosBanca
+            // 
+            this.lblPontosBanca.AutoSize = true;
+            this.lblPontosBanca.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPontosBanca.Location = new System.Drawing.Point(13, 472);
+            this.lblPontosBanca.Name = "lblPontosBanca";
+            this.lblPontosBanca.Size = new System.Drawing.Size(92, 32);
+            this.lblPontosBanca.TabIndex = 9;
+            this.lblPontosBanca.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -154,6 +178,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panelJogo.ResumeLayout(false);
+            this.panelJogo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -171,6 +196,8 @@
         private System.Windows.Forms.Button ButtonComprar;
         private System.Windows.Forms.Button ButtonReiniciar;
         private System.Windows.Forms.Button ButtonParar;
+        private System.Windows.Forms.Label lblPontosJogador;
+        private System.Windows.Forms.Label lblPontosBanca;
     }
 }
 

@@ -43,13 +43,11 @@ namespace Projeto21POO
             return nova;
         }
 
-        public void JogarBanca()
+        public Carta JogarBanca()
         {
-            while (banca.DeveComprarCarta())
-            {
-                Carta nova = baralho.RetiraCarta();
-                banca.ReceberCarta(nova);
-            }
+            Carta nova = baralho.RetiraCarta();
+            banca.ReceberCarta(nova);
+            return nova;
         }
 
         public int VerificarFimDeJogo(bool jogadorParou)
