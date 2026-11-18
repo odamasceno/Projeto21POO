@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 
 namespace Projeto21POO
 {
@@ -101,18 +100,9 @@ namespace Projeto21POO
 
         private void CarregarImagem()
         {
-            string nomeArquivo = $"{this.Numero}_{this.Naipe}.png";
-            try
-            {
-                string caminho = $"deck_2\\{nomeArquivo}";
-                this.Imagem = Image.FromFile(caminho);
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
-                throw;
-            }
-
+            string nomeArquivo = $"{this.Naipe}_{this.Numero}.png";
+            string caminho = $"Cartas\\deck_2\\{nomeArquivo}";
+            this.Imagem = Image.FromFile(caminho);
         }
     }
 }

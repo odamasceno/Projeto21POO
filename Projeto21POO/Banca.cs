@@ -8,9 +8,9 @@ namespace Projeto21POO
 {
     internal class Banca : Jogador
     {
-        public bool DeveComprarCarta()
+        public bool DeveComprarCarta(int pontuacaoJogador)
         {
-            return GetPontuacao() < 17;
+            return ((GetPontuacao() < pontuacaoJogador) && (GetPontuacao() < 21));
         }
     }
 }

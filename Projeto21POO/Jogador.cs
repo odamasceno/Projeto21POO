@@ -22,7 +22,7 @@ namespace Projeto21POO
             return Mao;
         }
 
-        public void SetMao(List<Carta> Mao)
+        private void SetMao(List<Carta> Mao)
         {
             this.Mao = Mao;
         }
@@ -32,7 +32,7 @@ namespace Projeto21POO
             return Pontuacao;
         }
 
-        public void SetPontuacao(int Pontuacao)
+        protected void SetPontuacao(int Pontuacao)
         {
             if(Pontuacao >= 0)
             {

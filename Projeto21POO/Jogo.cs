@@ -50,7 +50,7 @@ namespace Projeto21POO
             return nova;
         }
 
-        public int VerificarFimDeJogo(bool jogadorParou)
+        public virtual int VerificarFimDeJogo(bool jogadorParou)
         {
             if (jogador.GetPontuacao() > 21)
             {

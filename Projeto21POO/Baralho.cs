@@ -43,7 +43,7 @@ namespace Projeto21POO
             return Cartas;
         }
 
-        public void SetCartas(List<Carta> cartas)
+        private void SetCartas(List<Carta> cartas)
         {
             this.Cartas = cartas;
         }
